@@ -47,11 +47,10 @@ model = Sequential([
     layers.LSTM(50),
     layers.Dense(1)
 ])
-model.compile(loss='mean_squared_error', optimizer='adam')
+model.compile(loss='mean_squared_error', optimizer='adam', metrics='mean_squared_error')
 model.fit(X_train, y_train, epochs=100, batch_size=1, verbose=2, validation_data=(X_test, y_test))
 y1 = model.predict(x)
-
-test_acc = model.evaluate(X_test, y_test, verbose=0)
+test_loss, test_acc = model.evaluate(X_test, y_test, verbose=0)
 print('simple model:', error_mean_train_simple)
 print('recurrent nn, error prediction', test_acc)
 print('ar model, prediction on train: ', error_mean_train, ' prediction on test:', error_mean_test)
